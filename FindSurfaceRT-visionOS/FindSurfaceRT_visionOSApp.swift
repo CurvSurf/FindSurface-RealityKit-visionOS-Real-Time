@@ -7,27 +7,49 @@
 
 import SwiftUI
 
+import FindSurface_visionOS
+
 @main
+@MainActor
 struct FindSurfaceRT_visionOSApp: App {
-
-    @State private var appModel = AppModel()
-
+    
+    @State private var sessionManager = SessionManager()
+    @State private var appState = AppState()
+    @State private var findSurface = FindSurface.instance
+    @State private var scenePhaseTracker = ScenePhaseTracker()
+    @State private var timer = FoundTimer(eventsCount: 150)
+    
+    init() {}
+    
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environment(appModel)
+        
+        WindowGroup(sceneID: SceneID.startup, for: SceneID.self) { _ in
+            StartupView()
+                .environment(sessionManager)
+                .trackingScenePhase(by: scenePhaseTracker, sceneID: .startup)
+                .glassBackgroundEffect()
         }
-
-        ImmersiveSpace(id: appModel.immersiveSpaceID) {
+        .windowResizability(.contentSize)
+        .windowStyle(.plain)
+        
+        ImmersiveSpace(sceneID: SceneID.immersiveSpace) {
             ImmersiveView()
-                .environment(appModel)
-                .onAppear {
-                    appModel.immersiveSpaceState = .open
-                }
-                .onDisappear {
-                    appModel.immersiveSpaceState = .closed
-                }
+                .environment(appState)
+                .environment(findSurface)
+                .environment(sessionManager)
+                .environment(scenePhaseTracker)
+                .environment(timer)
+                .trackingScenePhase(by: scenePhaseTracker, sceneID: .immersiveSpace)
         }
-        .immersionStyle(selection: .constant(.mixed), in: .mixed)
-     }
+        
+        WindowGroup(sceneID: SceneID.userGuide, for: SceneID.self) { _ in
+            UserGuideView()
+                .environment(scenePhaseTracker)
+                .trackingScenePhase(by: scenePhaseTracker, sceneID: .userGuide)
+                .glassBackgroundEffect()
+        }
+        .windowResizability(.contentSize)
+        .windowStyle(.plain)
+
+    }
 }
