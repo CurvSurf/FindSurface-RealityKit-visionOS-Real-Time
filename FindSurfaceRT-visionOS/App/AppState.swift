@@ -230,7 +230,6 @@ final class AppState {
                 result = _result
                 return
             } catch {
-
                 return
             }
         }

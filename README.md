@@ -72,13 +72,39 @@ This section explains how to detect geometry using `FindSurface-visionOS` packag
 
 To detect geometry using FindSurface, at least two steps are necessary: the first is to specify parameters that correspond to the environment and target geometry. The parameters can be adjusted in the control window, as explained above. The second is to define a seed point from which the search in the point cloud obtained from the environment will begin. This process involves ray casting towards the direction of a point shown at the center of the screen. The ray picks a triangle and then the closest point among its three vertices will be used as the seed point.
 
-/* code reference here */
+````swift
+// starting at line 203 in AppState.swift
+guard let hit = await meshVertexManager.raycast(origin: devicePosition, direction: deviceDirection),
+      let points = await meshVertexManager.nearestTriangleVertices(hit) else {
+            
+    /* ... source code omitted ... */
+    return
+}
+````
 
-The `raycast` function performs ray casting using the position and direction of the user device (`DeviceAnchor`). The direction is slightly adjusted about 10 degree below the center of the screen to align with the user's sight. The `nearestTriangleVertices` function returns the tree vertices of the triangle from ray casting result. The vertices are sorted by their distance from the ray (`points.0` is nearest).
+The `meshVertexManager.raycast` function performs ray casting using the position and direction of the user device (`DeviceAnchor`). The direction is slightly adjusted about 10 degree below the center of the screen to align with the user's sight. The `nearestTriangleVertices` function returns the tree vertices of the triangle in a form of tuple of `simd_float3`. The vertices are sorted by their distance from the ray (`points.0` is nearest). 
 
 Once these steps are completed, the API can be called as follows:
 
-/* code reference here */
+````swift
+// starting at line 220 in AppState.swift
+await criticalSection {
+    do {
+        let _result = try await findSurface.perform {
+            let meshPoints = meshVertexManager.vertices
+            guard let index = meshPoints.firstIndex(of: points.0) else { return nil }
+            return (meshPoints, index)
+        }
+        
+        guard let _result else { return }
+        
+        result = _result
+        return
+    } catch {
+        return
+    }
+}
+````
 
 Due to the limitation of the FindSurface's current implementation, FindSurface does not support multithreading. Therefore, if multiple threads call FindSurface's detection function simultaneously, unexpected behavior may occur.
 
