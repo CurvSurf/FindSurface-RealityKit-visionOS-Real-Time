@@ -22,7 +22,7 @@ actor PersistentDataModel {
     static let shared = PersistentDataModel()
     private init() {
         do {
-            let container = try ModelContainer(for: PersistentObject2.self)
+            let container = try ModelContainer(for: PersistentObject.self)
             let context = ModelContext(container)
             
             self.container = container
@@ -33,7 +33,7 @@ actor PersistentDataModel {
     }
     
     var count: Int {
-        let descriptor = FetchDescriptor<PersistentObject2>(predicate: .true)
+        let descriptor = FetchDescriptor<PersistentObject>(predicate: .true)
         do {
             return try context.fetchCount(descriptor)
         } catch {
@@ -41,12 +41,12 @@ actor PersistentDataModel {
         }
     }
     
-    func register(_ object: PersistentObject2) {
+    func register(_ object: PersistentObject) {
         context.insert(object)
     }
     
-    func find(forID uuid: UUID) -> PersistentObject2? {
-        let descriptor = FetchDescriptor<PersistentObject2>(predicate: #Predicate { $0.uuid == uuid })
+    func find(forID uuid: UUID) -> PersistentObject? {
+        let descriptor = FetchDescriptor<PersistentObject>(predicate: #Predicate { $0.uuid == uuid })
         do {
             return try context.fetch(descriptor).first
         } catch {
@@ -55,7 +55,7 @@ actor PersistentDataModel {
     }
     
     @discardableResult
-    func deregister(forID uuid: UUID) -> PersistentObject2? {
+    func deregister(forID uuid: UUID) -> PersistentObject? {
         if let object = find(forID: uuid) {
             context.delete(object)
             return object
@@ -63,12 +63,12 @@ actor PersistentDataModel {
         return nil
     }
     
-    func deregister(_ object: PersistentObject2) {
+    func deregister(_ object: PersistentObject) {
         context.delete(object)
     }
     
-    var objects: [PersistentObject2] {
-        let descriptor = FetchDescriptor<PersistentObject2>(predicate: .true)
+    var objects: [PersistentObject] {
+        let descriptor = FetchDescriptor<PersistentObject>(predicate: .true)
         do {
             return try context.fetch(descriptor)
         } catch {
@@ -133,7 +133,7 @@ struct PendingObject {
 }
 
 @Model
-final class PersistentObject2 {
+final class PersistentObject {
 
     private(set) var uuid: UUID
     @Attribute(.unique) private(set) var name: String
@@ -167,7 +167,7 @@ protocol PersistentProtocol {
     var extrinsics: simd_float4x4 { get set }
 }
 
-extension PersistentObject2 {
+extension PersistentObject {
     
     convenience init(from object: PendingObject, forID id: UUID) {
         self.init(uuid: id,

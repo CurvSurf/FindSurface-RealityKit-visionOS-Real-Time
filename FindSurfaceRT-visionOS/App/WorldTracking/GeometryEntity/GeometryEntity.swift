@@ -9,16 +9,16 @@ import Foundation
 import RealityKit
 
 struct PersistentDataComponent: Component {
-    var data: PersistentObject2
+    var data: PersistentObject
 }
 
 protocol HasPersistentDataComponent {
     
-    var data: PersistentObject2? { get set }
+    var data: PersistentObject? { get set }
 }
 
 extension HasPersistentDataComponent where Self: Entity {
-    var data: PersistentObject2? {
+    var data: PersistentObject? {
         get { self.components[PersistentDataComponent.self]?.data }
         set {
             if let newValue {
@@ -61,7 +61,7 @@ class GeometryEntity: Entity, HasPersistentDataComponent {
 
 extension GeometryEntity {
     
-    class func generate(from object: PersistentObject2) async -> GeometryEntity {
+    class func generate(from object: PersistentObject) async -> GeometryEntity {
         let entity: GeometryEntity = switch object.geometry {
         case let .plane(plane):
             PlaneEntity(width: plane.width, height: plane.height) as GeometryEntity
@@ -142,7 +142,7 @@ extension ModelEntity {
         return entity
     }
     
-    class func generatePointcloudEntity(from object: PersistentObject2) async -> ModelEntity? {
+    class func generatePointcloudEntity(from object: PersistentObject) async -> ModelEntity? {
         
         let name = "\(object.name) (inliers)"
         let materials: [any Material] = switch object.geometry {

@@ -87,9 +87,9 @@ final class GeometryManager {
     @MainActor
     func anchorAdded(_ anchor: WorldAnchor) async -> Bool {
         
-        var persistentObject: PersistentObject2? = nil
+        var persistentObject: PersistentObject? = nil
         if let pendingObject = pendingObjects.removeValue(forKey: anchor.id) {
-            let object = PersistentObject2(from: pendingObject, forID: anchor.id)
+            let object = PersistentObject(from: pendingObject, forID: anchor.id)
             await PersistentDataModel.shared.register(object)
             persistentObject = object
         } else {
