@@ -81,7 +81,7 @@ struct UserGuideView: View {
     private func loadContent() async {
         
         guard content == nil,
-              let url = Bundle.main.url(forResource: "README", withExtension: "md"),
+              let url = Bundle.main.url(forResource: "USERGUIDE", withExtension: "md"),
               let data = try? Data(contentsOf: url) else { return }
         content = String(data: data, encoding: .utf8)
         isLoading = false
