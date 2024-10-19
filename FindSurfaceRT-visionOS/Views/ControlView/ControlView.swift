@@ -122,11 +122,15 @@ fileprivate struct ControlViewTextField: View {
     let lowerbound: Float
     let upperbound: Float
     
+    @FocusState private var focused: Bool
+    
     var body: some View {
         HStack {
             ControlViewMonospacedLabel(text: label, groupName: "ControlViewTextField")
-            TextField("", value: $value, formatter: .decimal(1)) { finished in
-                if finished {
+            TextField("", value: $value, formatter: .decimal(1))
+            .focused($focused)
+            .onChange(of: focused) { old, new in
+                if old && !new {
                     value = min(max(value, lowerbound), upperbound)
                 }
             }
