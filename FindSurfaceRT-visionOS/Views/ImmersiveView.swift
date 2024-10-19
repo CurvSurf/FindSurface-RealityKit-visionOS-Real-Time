@@ -142,9 +142,15 @@ struct ImmersiveView: View {
     
     private func onDisappear() {
         FindSurface.instance.saveToUserDefaults()
+        Task {
+            await PersistentDataModel.shared.save()
+        }
     }
     
     private func onScenePhaseNotActive() {
         FindSurface.instance.saveToUserDefaults()
+        Task {
+            await PersistentDataModel.shared.save()
+        }
     }
 }

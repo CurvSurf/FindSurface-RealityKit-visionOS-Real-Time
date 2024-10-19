@@ -76,7 +76,9 @@ actor PersistentDataModel {
         }
     }
     
-    
+    func save() {
+        try! context.save()
+    }
 }
 
 enum Geometry: Hashable, Codable {
