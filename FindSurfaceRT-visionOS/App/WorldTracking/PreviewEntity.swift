@@ -101,7 +101,11 @@ final class PreviewEntity: Entity {
             torus.update { intrinsics in
                 intrinsics.meanRadius = object.meanRadius
                 intrinsics.tubeRadius = object.tubeRadius
-                let (begin, delta) = object.calcAngleRange(from: inliers)
+                var (begin, delta) = object.calcAngleRange(from: inliers)
+                if delta > 1.5 * .pi {
+                    begin = 0.0
+                    delta = 2.0 * .pi
+                }
                 intrinsics.tubeBegin = begin
                 intrinsics.tubeAngle = delta
             }
