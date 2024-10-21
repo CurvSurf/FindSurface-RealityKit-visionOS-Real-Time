@@ -115,15 +115,6 @@ fileprivate struct PermissionOverlayView: View {
         }
         .padding(.vertical, 8)
         .frame(width: 360)
-        .onAppear {
-            print("appear")
-        }
-        .onDisappear {
-            print("disappear")
-        }
-        .onChange(of: scenePhase) {
-            print("scenePhase: \(scenePhase)")
-        }
     }
 }
 
