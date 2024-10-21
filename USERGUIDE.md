@@ -14,7 +14,7 @@ As mentioned in [here](https://github.com/CurvSurf/FindSurface-visionOS#overview
 
 ## Requirements
 
-The app runs on an Apple Vision Pro (visionOS 2.0+) device only, and requires your permissions to track your hands and to scan your environment (world sensing) to operate as intended. Dialogs asking the permissions will be prompted upon launching the app.
+The app runs on an Apple Vision Pro (visionOS 2.0+) device only, and requires your permissions to track your hands and to scan your environment (world sensing) in order to operate as intended. Dialogs asking the permissions will be prompted upon launching the app.
 
 
 ## How to use
@@ -82,7 +82,7 @@ guard let hit = await meshVertexManager.raycast(origin: devicePosition, directio
 }
 ````
 
-The `meshVertexManager.raycast` function performs ray casting using the position and direction of the user device (`DeviceAnchor`). The direction is slightly adjusted about 10 degree below the center of the screen to align with the user's sight. The `nearestTriangleVertices` function returns the tree vertices of the triangle in a form of tuple of `simd_float3`. The vertices are sorted by their distance from the ray (`points.0` is nearest). 
+The `meshVertexManager.raycast` function performs ray casting using the position and direction of the user device (`DeviceAnchor`). The direction is slightly adjusted about 10 degree below the center of the screen to align with the user's sight. The `nearestTriangleVertices` function returns the three vertices of the triangle in a form of tuple of `simd_float3`. The vertices are sorted by their distance from the ray (`points.0` is nearest). 
 
 Once these steps are completed, the API can be called as follows:
 
