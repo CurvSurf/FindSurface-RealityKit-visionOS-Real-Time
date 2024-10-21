@@ -50,11 +50,11 @@ final class PreviewEntity: Entity {
         setPreviewVisibility()
     }
     
-    private func setPreviewVisibility(plane planeVisible: Bool = false,
-                                      sphere sphereVisible: Bool = false,
-                                      cylinder cylinderVisible: Bool = false,
-                                      cone coneVisible: Bool = false,
-                                      torus torusVisible: Bool = false) {
+    func setPreviewVisibility(plane planeVisible: Bool = false,
+                              sphere sphereVisible: Bool = false,
+                              cylinder cylinderVisible: Bool = false,
+                              cone coneVisible: Bool = false,
+                              torus torusVisible: Bool = false) {
         plane.isVisible = planeVisible
         sphere.isVisible = sphereVisible
         cylinder.isVisible = cylinderVisible

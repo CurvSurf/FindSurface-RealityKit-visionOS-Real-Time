@@ -145,6 +145,7 @@ struct ImmersiveView: View {
         Task {
             await PersistentDataModel.shared.save()
         }
+        state.previewEntity.setPreviewVisibility()
     }
     
     private func onScenePhaseNotActive() {
@@ -152,5 +153,6 @@ struct ImmersiveView: View {
         Task {
             await PersistentDataModel.shared.save()
         }
+        state.previewEntity.setPreviewVisibility()
     }
 }

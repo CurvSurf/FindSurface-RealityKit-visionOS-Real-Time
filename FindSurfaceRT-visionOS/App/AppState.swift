@@ -35,7 +35,7 @@ final class AppState {
     
     var meshVertexManager: MeshVertexManager
     var geometryManager: GeometryManager
-    private let previewEntity: PreviewEntity
+    let previewEntity: PreviewEntity
     
     let controlWindow: ControlWindow
     private var shouldInitializeControlWindowPosition: Bool = true
@@ -236,15 +236,14 @@ final class AppState {
                          
         guard let result else {
             timer.record(found: false)
-            previewEntity.isVisible = false
+            await previewEntity.setPreviewVisibility()
             return
         }
         if case .none(_) = result {
             timer.record(found: false)
-            previewEntity.isVisible = false
+            await previewEntity.setPreviewVisibility()
             return
         }
-        previewEntity.isVisible = true
         timer.record(found: true)
         
         guard Task.isCancelled == false else { return }
