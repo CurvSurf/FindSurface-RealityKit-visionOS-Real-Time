@@ -61,6 +61,7 @@ final class SessionManager {
                 switch type {
                 case .worldSensing: worldSensingAuthorizationStatus = status
                 case .handTracking: handTrackingAuthorizationStatus = status
+                case .cameraAccess: fallthrough
                 @unknown default: break
                 }
                 
