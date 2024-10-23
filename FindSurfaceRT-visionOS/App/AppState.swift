@@ -15,6 +15,7 @@ import SwiftData
 
 import FindSurface_visionOS
 
+let resultPreservationTime: ContinuousClock.Duration = .milliseconds(200)
 
 @Observable
 final class AppState {
@@ -48,6 +49,26 @@ final class AppState {
     let statusWindow: StatusWindow
     
     let timer = FoundTimer(eventsCount: 180)
+
+    private var _latestResult: (FindSurface.Result, Double)? = nil
+    private var latestResult: FindSurface.Result? {
+        get {
+            guard let _latestResult else { return nil }
+            let (result, timestamp) = _latestResult
+            
+            let current = Double(DispatchTime.now().uptimeNanoseconds) / 1_000_000
+            guard current - timestamp < 200.0 else { return nil }
+            if case .none(_) = result { return nil }
+            return result
+        }
+        set {
+            if let newValue {
+                _latestResult = (newValue, Double(DispatchTime.now().uptimeNanoseconds) / 1_000_000)
+            } else {
+                _latestResult = nil
+            }
+        }
+    }
     
     init() {
         
@@ -239,12 +260,6 @@ final class AppState {
             await previewEntity.setPreviewVisibility()
             return
         }
-        if case .none(_) = result {
-            timer.record(found: false)
-            await previewEntity.setPreviewVisibility()
-            return
-        }
-        timer.record(found: true)
         
         guard Task.isCancelled == false else { return }
         
@@ -270,16 +285,28 @@ final class AppState {
         
         result.alignGeometryAndTransformInliers(devicePosition: devicePosition, true, 0.10)
         
+        if case .none(_) = result {
+            timer.record(found: false)
+        } else {
+            timer.record(found: true)
+            latestResult = result
+        }
+        
         if shouldTakeNextPreviewAsResult {
             shouldTakeNextPreviewAsResult = false
             
             if case .none = result {
-                AudioServicesPlaySystemSound(1053)
-                return
+                if let latestResult {
+                    self.latestResult = nil
+                    result = latestResult
+                } else {
+                    AudioServicesPlaySystemSound(1053)
+                    return
+                }
             }
             
             AudioServicesPlaySystemSound(1100)
-        
+            
             let worldAnchor = await geometryManager.addPendingObject(result)
             do {
                 try await worldAnchorUpdater.addAnchor(worldAnchor)
