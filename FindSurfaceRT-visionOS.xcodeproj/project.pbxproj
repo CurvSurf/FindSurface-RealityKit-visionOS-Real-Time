@@ -10,18 +10,14 @@
 		F3708F292CA290D9009CE542 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = F3708F282CA290D9009CE542 /* Algorithms */; };
 		F3708F2C2CA290EB009CE542 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = F3708F2B2CA290EB009CE542 /* MarkdownUI */; };
 		F386C9BF2CC24F2500EC89A3 /* FindSurface-visionOS in Frameworks */ = {isa = PBXBuildFile; productRef = F386C9BE2CC24F2500EC89A3 /* FindSurface-visionOS */; };
-		F386C9D82CC3B01C00EC89A3 /* status-view.png in Resources */ = {isa = PBXBuildFile; fileRef = F386C9D52CC3B01C00EC89A3 /* status-view.png */; };
-		F386C9D92CC3B01C00EC89A3 /* USERGUIDE.md in Resources */ = {isa = PBXBuildFile; fileRef = F386C9D72CC3B01C00EC89A3 /* USERGUIDE.md */; };
-		F386C9DA2CC3B01C00EC89A3 /* startup-window.png in Resources */ = {isa = PBXBuildFile; fileRef = F386C9D42CC3B01C00EC89A3 /* startup-window.png */; };
-		F386C9DB2CC3B01C00EC89A3 /* controls-window.png in Resources */ = {isa = PBXBuildFile; fileRef = F386C9D32CC3B01C00EC89A3 /* controls-window.png */; };
+		F386CCB42CCA2C4900EC89A3 /* images in Resources */ = {isa = PBXBuildFile; fileRef = F386CCB32CCA2C4900EC89A3 /* images */; };
+		F386CCB62CCA2F3E00EC89A3 /* USERGUIDE.md in Resources */ = {isa = PBXBuildFile; fileRef = F386CCB52CCA2F3E00EC89A3 /* USERGUIDE.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F3708EF82CA15657009CE542 /* FindSurfaceRT-visionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FindSurfaceRT-visionOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F386C9D32CC3B01C00EC89A3 /* controls-window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "controls-window.png"; sourceTree = "<group>"; };
-		F386C9D42CC3B01C00EC89A3 /* startup-window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startup-window.png"; sourceTree = "<group>"; };
-		F386C9D52CC3B01C00EC89A3 /* status-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-view.png"; sourceTree = "<group>"; };
-		F386C9D72CC3B01C00EC89A3 /* USERGUIDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = USERGUIDE.md; sourceTree = SOURCE_ROOT; };
+		F386CCB32CCA2C4900EC89A3 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		F386CCB52CCA2F3E00EC89A3 /* USERGUIDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = USERGUIDE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -62,7 +58,8 @@
 		F3708EEF2CA15657009CE542 = {
 			isa = PBXGroup;
 			children = (
-				F386C9C02CC3AE8D00EC89A3 /* Miscellaneous */,
+				F386CCB52CCA2F3E00EC89A3 /* USERGUIDE.md */,
+				F386CCB32CCA2C4900EC89A3 /* images */,
 				F3708EFA2CA15657009CE542 /* FindSurfaceRT-visionOS */,
 				F3708EF92CA15657009CE542 /* Products */,
 			);
@@ -75,25 +72,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		F386C9C02CC3AE8D00EC89A3 /* Miscellaneous */ = {
-			isa = PBXGroup;
-			children = (
-				F386C9D62CC3B01C00EC89A3 /* images */,
-				F386C9D72CC3B01C00EC89A3 /* USERGUIDE.md */,
-			);
-			path = Miscellaneous;
-			sourceTree = "<group>";
-		};
-		F386C9D62CC3B01C00EC89A3 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				F386C9D32CC3B01C00EC89A3 /* controls-window.png */,
-				F386C9D42CC3B01C00EC89A3 /* startup-window.png */,
-				F386C9D52CC3B01C00EC89A3 /* status-view.png */,
-			);
-			path = images;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -167,10 +145,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F386C9D82CC3B01C00EC89A3 /* status-view.png in Resources */,
-				F386C9D92CC3B01C00EC89A3 /* USERGUIDE.md in Resources */,
-				F386C9DA2CC3B01C00EC89A3 /* startup-window.png in Resources */,
-				F386C9DB2CC3B01C00EC89A3 /* controls-window.png in Resources */,
+				F386CCB62CCA2F3E00EC89A3 /* USERGUIDE.md in Resources */,
+				F386CCB42CCA2C4900EC89A3 /* images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
