@@ -50,23 +50,28 @@ final class AppState {
     
     let timer = FoundTimer(eventsCount: 180)
 
-    private var _latestResult: (FindSurface.Result, Double)? = nil
-    private var latestResult: FindSurface.Result? {
-        get {
-            guard let _latestResult else { return nil }
-            let (result, timestamp) = _latestResult
-            
-            let current = Double(DispatchTime.now().uptimeNanoseconds) / 1_000_000
-            guard current - timestamp < 200.0 else { return nil }
-            if case .none(_) = result { return nil }
-            return result
-        }
-        set {
-            if let newValue {
-                _latestResult = (newValue, Double(DispatchTime.now().uptimeNanoseconds) / 1_000_000)
-            } else {
-                _latestResult = nil
-            }
+    private var _latestResult: (FindSurface.Result, simd_float3, Double)? = nil
+    
+    private func getLatestResult(_ location: simd_float3) -> FindSurface.Result? {
+        guard let _latestResult else { return nil }
+        let (result, latestLocation, timestamp) = _latestResult
+        
+        if case .none(_) = result { return nil }
+        
+        let current = Double(DispatchTime.now().uptimeNanoseconds) / 1_000_000
+        guard current - timestamp < 200.0 else { return nil }
+        
+        guard distance_squared(location, latestLocation) < 0.01 else { return nil }
+        
+        return result
+    }
+    
+    private func setLatestResult(_ result: FindSurface.Result?, _ location: simd_float3) {
+        if let result {
+            let timestamp = Double(DispatchTime.now().uptimeNanoseconds) / 1_000_000
+            _latestResult = (result, location, timestamp)
+        } else {
+            _latestResult = nil
         }
     }
     
@@ -290,15 +295,15 @@ final class AppState {
             timer.record(found: false)
         } else {
             timer.record(found: true)
-            latestResult = result
+            setLatestResult(result, location)
         }
         
         if shouldTakeNextPreviewAsResult {
             shouldTakeNextPreviewAsResult = false
             
             if case .none = result {
-                if let latestResult {
-                    self.latestResult = nil
+                if let latestResult = getLatestResult(location) {
+                    setLatestResult(nil, .zero)
                     result = latestResult
                 } else {
                     AudioServicesPlaySystemSound(1053)
