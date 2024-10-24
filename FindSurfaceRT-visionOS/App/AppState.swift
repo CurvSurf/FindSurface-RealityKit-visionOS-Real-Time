@@ -225,6 +225,7 @@ final class AppState {
               let points = await meshVertexManager.nearestTriangleVertices(hit) else {
             
             timer.record(found: false)
+            await previewEntity.setPreviewVisibility()
             await pickingIndicator.setPosition(devicePosition + deviceDirection, relativeTo: nil)
             return
         }
