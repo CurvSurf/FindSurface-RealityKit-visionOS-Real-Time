@@ -74,7 +74,7 @@ To detect geometry using FindSurface, at least two steps are necessary: the firs
 
 https://github.com/CurvSurf/FindSurface-RealityKit-visionOS-Real-Time/blob/69da589566f36307120a64eeaeeea6597b64735f/FindSurfaceRT-visionOS/App/AppState.swift#L203-L209
 
-The `meshVertexManager.raycast` function performs ray casting using the position and direction of the user device (`DeviceAnchor`). The direction is slightly adjusted about 10 degree below the center of the screen to align with the user's sight. The `nearestTriangleVertices` function returns the three vertices of the triangle in a form of tuple of `simd_float3`. The vertices are sorted by their distance from the ray (`points.0` is nearest). 
+The `meshVertexManager.raycast` function performs ray casting using the position and direction of the user device (`DeviceAnchor`). The direction is slightly adjusted about 10 degrees below the center of the screen to align with the user's natural line of sight (for more details, see the `Adjust Device Anchor direction` section in [this document](https://github.com/CurvSurf/FindSurface-RealityKit-visionOS-Response-to-Request/blob/main/USERGUIDE.md#settings-behaviors)). The `nearestTriangleVertices` function returns the three vertices of the triangle in a form of tuple of `simd_float3`. The vertices are sorted by their distance from the ray (`points.0` is nearest). 
 
 Once these steps are completed, the API can be called as follows:
 
