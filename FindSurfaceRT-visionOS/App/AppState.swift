@@ -50,6 +50,8 @@ final class AppState {
     
     let timer = FoundTimer(eventsCount: 180)
 
+    let warningWindow: WarningWindow
+    
     private var _latestResult: (FindSurface.Result, simd_float3, Double)? = nil
     
     private func getLatestResult(_ location: simd_float3) -> FindSurface.Result? {
@@ -114,6 +116,9 @@ final class AppState {
         let statusWindow = StatusWindow()
         rootEntity.addChild(statusWindow)
         
+        let warningWindow = WarningWindow()
+        rootEntity.addChild(warningWindow)
+        
         self.sceneReconstruction = sceneReconstruction
         self.worldTracking = worldTracking
         self.handTracking = handTracking
@@ -133,6 +138,7 @@ final class AppState {
         self.seedRadiusIndicator = seedRadiusIndicator
         self.pickingIndicator = pickingIndicator
         self.statusWindow = statusWindow
+        self.warningWindow = warningWindow
     }
     
     private var findSurfaceSemaphore = DispatchSemaphore(value: 1)
@@ -171,6 +177,9 @@ final class AppState {
                 self.shouldInitializeControlWindowPosition = false
                 self.locateControlWindowAroundDevice(transform)
             }
+            
+            self.warningWindow.look(at: transform.position, and: -transform.basisZ)
+            self.warningWindow.checkCount(self.meshVertexManager.vertexCount)
         }
     }
     

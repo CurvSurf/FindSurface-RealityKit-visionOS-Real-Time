@@ -13,4 +13,5 @@ enum SceneID: String, Codable, SceneIDProtocol {
     case immersiveSpace = "ImmersiveView"
     case inspector = "InspectorView"
     case userGuide = "UserGuideView"
+    case restartGuide = "RestartGuideView"
 }

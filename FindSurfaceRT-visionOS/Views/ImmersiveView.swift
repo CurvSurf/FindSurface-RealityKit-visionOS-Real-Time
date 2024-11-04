@@ -23,6 +23,7 @@ struct ImmersiveView: View {
         case radius
         case status
         case confirm
+        case warning
     }
     
     @Environment(\.scenePhase) private var scenePhase
@@ -100,6 +101,10 @@ struct ImmersiveView: View {
             state.controlWindow.confirmView = confirmAttachment
         }
         
+        if let warningAttachment = attachments.entity(for: AttachmentKey.warning) {
+            state.warningWindow.warningView = warningAttachment
+        }
+        
         Task {
             await sessionManager.run(with: state.dataProviders)
         }
@@ -127,6 +132,12 @@ struct ImmersiveView: View {
                 .environment(state)
                 .environment(state.timer)
                 .frame(width: 320)
+        }
+        
+        Attachment(id: AttachmentKey.warning) {
+            WarningView()
+                .environment(state)
+                .glassBackgroundEffect()
         }
     }
     

@@ -23,14 +23,14 @@ final class StatusWindow: Entity {
     }
     
     required init() {
-        
+        super.init()
     }
     
     func look(at devicePosition: simd_float3,
               from hand: HandEntity) {
         
         guard hand.isTracked,
-              let wristTransform = hand.jointTransform(.forearmWrist)else {
+              let wristTransform = hand.jointTransform(.forearmWrist) else {
             isVisible = false
             return
         }

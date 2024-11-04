@@ -50,6 +50,5 @@ struct FindSurfaceRT_visionOSApp: App {
         }
         .windowResizability(.contentSize)
         .windowStyle(.plain)
-
     }
 }
