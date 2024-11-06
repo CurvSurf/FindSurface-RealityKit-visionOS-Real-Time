@@ -30,12 +30,12 @@ final class ControlWindow: Entity {
             }
             if let confirmView {
                 addChild(confirmView)
-                confirmView.isEnabled = false
+                confirmView.isVisible = false
                 confirmView.setPosition(.init(0, 0, 0.10), relativeTo: self)
             }
         }
     }
-    
+        
     required init() {
         
     }

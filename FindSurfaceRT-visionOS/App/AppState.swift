@@ -41,6 +41,18 @@ final class AppState {
     let controlWindow: ControlWindow
     private var shouldInitializeControlWindowPosition: Bool = true
     
+    var showConfirmWindow: Bool {
+        get {
+            access(keyPath: \.showConfirmWindow)
+            return controlWindow.confirmView?.isVisible ?? false
+        }
+        set {
+            withMutation(keyPath: \.showConfirmWindow) {
+                controlWindow.confirmView?.isVisible = newValue
+            }
+        }
+    }
+    
     private let triangleHighlighter: TriangleHighlighter
     
     let seedRadiusIndicator: SeedRadiusIndicator

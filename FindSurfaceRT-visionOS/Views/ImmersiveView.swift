@@ -122,6 +122,11 @@ struct ImmersiveView: View {
                 .environment(findSurface)
         }
         
+        Attachment(id: AttachmentKey.confirm) {
+            ConfirmationDialogView()
+                .environment(state)
+        }
+        
         Attachment(id: AttachmentKey.radius) {
             RadiusLabel()
                 .environment(findSurface)
@@ -142,6 +147,11 @@ struct ImmersiveView: View {
     }
     
     private func onTapGesture(_ location: simd_float3, _ entity: Entity) {
+        
+        if state.showConfirmWindow {
+            state.showConfirmWindow = false
+        }
+        
         if state.findSurfaceEnabled {
             state.shouldTakeNextPreviewAsResult = true
         }

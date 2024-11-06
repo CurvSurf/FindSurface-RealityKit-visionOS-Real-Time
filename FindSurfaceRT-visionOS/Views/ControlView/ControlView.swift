@@ -70,6 +70,8 @@ struct ControlView: View {
         .padding()
         .background(RoundedRectangle(cornerRadius: 8).stroke(.white, lineWidth: 1))
         .frame(width: allowFeatureTypeAny ? 380 : 320)
+        .disabled(state.showConfirmWindow)
+        .blur(radius: state.showConfirmWindow ? 3.0 : 0.0)
     }
 }
 

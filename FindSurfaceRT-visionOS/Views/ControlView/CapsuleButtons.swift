@@ -90,11 +90,9 @@ struct ClearButton: View {
     
     var body: some View {
         CapsuleImageButton(label: "Clear", systemImage: "trash", role: .destructive) {
-            Task {
-                try? await state.worldAnchorUpdater.removeAllAnchors()
-            }
+            state.showConfirmWindow = true
         }
-        .disabled(state.worldAnchorUpdater.activeAnchorIDs.isEmpty)
+        .disabled(state.geometryManager.geometryEntityMap.isEmpty)
     }
 }
 
