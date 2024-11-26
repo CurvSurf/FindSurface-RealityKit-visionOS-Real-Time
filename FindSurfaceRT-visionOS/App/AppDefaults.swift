@@ -30,10 +30,10 @@ extension FindSurface {
     
     func loadFromUserDefaults() {
         let storage = UserDefaults.Adapter<DefaultKey>()
-        measurementAccuracy = storage.float(forKey: .measurementAccuracy) ?? 0.015
-        meanDistance = storage.float(forKey: .meanDistance) ?? 0.15
-        seedRadius = storage.float(forKey: .seedRadius) ?? 0.15
-        lateralExtension = storage.enum(forKey: .lateralExtension) ?? .lv10
+        measurementAccuracy = storage.float(forKey: .measurementAccuracy) ?? 0.025
+        meanDistance = storage.float(forKey: .meanDistance) ?? 0.05
+        seedRadius = storage.float(forKey: .seedRadius) ?? 0.10
+        lateralExtension = storage.enum(forKey: .lateralExtension) ?? .off
         radialExpansion = storage.enum(forKey: .radialExpansion) ?? .lv5
         allowsCylinderInsteadOfCone = storage.bool(forKey: .allowsConeToCylinderConversion) ?? true
         allowsCylinderInsteadOfTorus = storage.bool(forKey: .allowsTorusToSphereConversion) ?? true

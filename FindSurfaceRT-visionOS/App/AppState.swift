@@ -234,7 +234,7 @@ final class AppState {
             }
         }
     }
-      
+    
     private func performFindSurface() async {
         
         guard Task.isCancelled == false else { return }
