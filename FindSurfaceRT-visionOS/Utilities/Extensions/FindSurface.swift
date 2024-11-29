@@ -111,4 +111,15 @@ extension FindSurface.Result {
         case .none(_): break
         }
     }
+    
+    var rmsError: Float {
+        switch self {
+        case let .foundPlane(_, _, rmsError):       return rmsError
+        case let .foundSphere(_, _, rmsError):      return rmsError
+        case let .foundCylinder(_, _, rmsError):    return rmsError
+        case let .foundCone(_, _, rmsError):        return rmsError
+        case let .foundTorus(_, _, rmsError):       return rmsError
+        case let .none(rmsError):                   return rmsError
+        }
+    }
 }

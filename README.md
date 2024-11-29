@@ -62,6 +62,7 @@ For the recommended preset of the parameters, please refer to [Optimal Parameter
 
 - `F` and fps stand for 'found-per-second', which is calculated from the average of time-intervals between the events that FindSurface detects a geometry.
 - `P` and pts mean the number of points that FindSurface receives as input, which are obtained from the surroundings of user.
+- The value coming after to the fps indicates the RMS error of the latest detection in preview mode.
 - Fps graph: When `Preview mode` is enabled, the change of the fps will be plotted on the background of the status view (not included in the screenshot above).
     > **Note**: '**found-per-second**' means how frequently the information about geometries around you are provided, but doesn't mean any performance score such as frame-per-second of when talking about how well GPUs perform. Also note that the X-axis of Fps graph is not related to the time scale but rather just records changes in fps only when the events occur.
 

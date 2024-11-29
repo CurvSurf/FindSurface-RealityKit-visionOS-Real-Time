@@ -89,6 +89,8 @@ final class AppState {
         }
     }
     
+    private(set) var latestRMSerror: Float = 0
+    
     init() {
         
         let sceneReconstruction = SceneReconstructionProvider()
@@ -276,9 +278,7 @@ final class AppState {
                 guard let _result else { return }
                 
                 result = _result
-                return
             } catch {
-                return
             }
         }
                          
@@ -309,13 +309,13 @@ final class AppState {
                                           _ location: simd_float3) async {
         
         var result = result
-        
         result.alignGeometryAndTransformInliers(devicePosition: devicePosition, true, 0.10)
         
         if case .none(_) = result {
             timer.record(found: false)
         } else {
             timer.record(found: true)
+            latestRMSerror = result.rmsError
             setLatestResult(result, location)
         }
         
