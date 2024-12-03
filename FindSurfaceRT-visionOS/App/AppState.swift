@@ -205,7 +205,7 @@ final class AppState {
             case .right:
                 controlWindow.look(at: deviceTransform, from: hand)
             case .left:
-                statusWindow.look(at: deviceTransform.position, from: hand)
+                statusWindow.look(at: deviceTransform, from: hand)
             }
         }
     }
