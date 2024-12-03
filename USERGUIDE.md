@@ -60,6 +60,8 @@ For the recommended preset of the parameters, please refer to [Optimal Parameter
 
 ![status-view.png](images/status-view.png)
 
+This view can be relocated by pinching with the middle finger and thumb of your left hand.
+
 - `F` and fps stand for 'found-per-second', which is calculated from the average of time-intervals between the events that FindSurface detects a geometry.
 - `P` and pts mean the number of points that FindSurface receives as input, which are obtained from the surroundings of user.
 - The value coming after to the fps indicates the RMS error of the latest detection in preview mode.
