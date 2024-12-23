@@ -7,9 +7,19 @@
 
 import RealityKit
 import _RealityKit_SwiftUI
+import Foundation
 
 final class WarningWindow: Entity {
-    
+    static let maxCount: Int = 100_000
+    static let maxCountLabel: String = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = ","
+        return formatter.string(from: NSNumber(value: maxCount)) ?? "\(maxCount)"
+    }()
+    static let maxCountShortLabel: String = {
+        return "\(maxCount / 1_000)k"
+    }()
     var warningView: ViewAttachmentEntity? = nil {
         didSet {
             if let oldValue {
@@ -37,7 +47,7 @@ final class WarningWindow: Entity {
     }
     
     func checkCount(_ count: Int) {
-        let opacity: Float = (count > 50_000) ? 1.0 : (count > 45_000 && !dismissed) ? 0.5 : 0.0
+        let opacity: Float = (count > Self.maxCount) ? 1.0 : (count > Self.maxCount - 5_000 && !dismissed) ? 0.5 : 0.0
         self.components.set(OpacityComponent(opacity: opacity))
     }
 }

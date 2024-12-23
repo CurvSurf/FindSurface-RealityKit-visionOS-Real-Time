@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		F3708F292CA290D9009CE542 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = F3708F282CA290D9009CE542 /* Algorithms */; };
 		F3708F2C2CA290EB009CE542 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = F3708F2B2CA290EB009CE542 /* MarkdownUI */; };
-		F386C9BF2CC24F2500EC89A3 /* FindSurface-visionOS in Frameworks */ = {isa = PBXBuildFile; productRef = F386C9BE2CC24F2500EC89A3 /* FindSurface-visionOS */; };
 		F386CCB42CCA2C4900EC89A3 /* images in Resources */ = {isa = PBXBuildFile; fileRef = F386CCB32CCA2C4900EC89A3 /* images */; };
 		F386CCB62CCA2F3E00EC89A3 /* USERGUIDE.md in Resources */ = {isa = PBXBuildFile; fileRef = F386CCB52CCA2F3E00EC89A3 /* USERGUIDE.md */; };
+		F3DE68482D1939B20025F379 /* FindSurface-visionOS in Frameworks */ = {isa = PBXBuildFile; productRef = F3DE68472D1939B20025F379 /* FindSurface-visionOS */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3708F2C2CA290EB009CE542 /* MarkdownUI in Frameworks */,
-				F386C9BF2CC24F2500EC89A3 /* FindSurface-visionOS in Frameworks */,
+				F3DE68482D1939B20025F379 /* FindSurface-visionOS in Frameworks */,
 				F3708F292CA290D9009CE542 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,12 +55,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F30488312CFF33EB0083B41F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F3708EEF2CA15657009CE542 = {
 			isa = PBXGroup;
 			children = (
 				F386CCB52CCA2F3E00EC89A3 /* USERGUIDE.md */,
 				F386CCB32CCA2C4900EC89A3 /* images */,
 				F3708EFA2CA15657009CE542 /* FindSurfaceRT-visionOS */,
+				F30488312CFF33EB0083B41F /* Frameworks */,
 				F3708EF92CA15657009CE542 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,7 +103,7 @@
 			packageProductDependencies = (
 				F3708F282CA290D9009CE542 /* Algorithms */,
 				F3708F2B2CA290EB009CE542 /* MarkdownUI */,
-				F386C9BE2CC24F2500EC89A3 /* FindSurface-visionOS */,
+				F3DE68472D1939B20025F379 /* FindSurface-visionOS */,
 			);
 			productName = "FindSurfaceRT-visionOS";
 			productReference = F3708EF82CA15657009CE542 /* FindSurfaceRT-visionOS.app */;
@@ -128,7 +136,7 @@
 			packageReferences = (
 				F3708F272CA290D9009CE542 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				F3708F2A2CA290EB009CE542 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
-				F386C9BD2CC24F2500EC89A3 /* XCRemoteSwiftPackageReference "FindSurface-visionOS" */,
+				F3DE68462D1939B20025F379 /* XCRemoteSwiftPackageReference "FindSurface-visionOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F3708EF92CA15657009CE542 /* Products */;
@@ -175,6 +183,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "FindSurfaceRT-visionOS";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -201,6 +210,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "FindSurfaceRT-visionOS";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -374,12 +384,12 @@
 				minimumVersion = 2.4.0;
 			};
 		};
-		F386C9BD2CC24F2500EC89A3 /* XCRemoteSwiftPackageReference "FindSurface-visionOS" */ = {
+		F3DE68462D1939B20025F379 /* XCRemoteSwiftPackageReference "FindSurface-visionOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CurvSurf/FindSurface-visionOS";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -395,9 +405,9 @@
 			package = F3708F2A2CA290EB009CE542 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
 		};
-		F386C9BE2CC24F2500EC89A3 /* FindSurface-visionOS */ = {
+		F3DE68472D1939B20025F379 /* FindSurface-visionOS */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F386C9BD2CC24F2500EC89A3 /* XCRemoteSwiftPackageReference "FindSurface-visionOS" */;
+			package = F3DE68462D1939B20025F379 /* XCRemoteSwiftPackageReference "FindSurface-visionOS" */;
 			productName = "FindSurface-visionOS";
 		};
 /* End XCSwiftPackageProductDependency section */

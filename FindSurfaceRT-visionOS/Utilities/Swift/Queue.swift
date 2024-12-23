@@ -23,7 +23,6 @@ public struct Queue<T>: RandomAccessCollection, Sequence {
     public var startIndex: Int { entries.startIndex }
     public var endIndex: Int { entries.endIndex }
     
-    // Collection 프로토콜을 준수하기 위해 필요한 서브스크립트 구현
     public subscript(index: Int) -> T {
         if entries.count < capacity {
             return entries[index]
@@ -33,12 +32,10 @@ public struct Queue<T>: RandomAccessCollection, Sequence {
         }
     }
     
-    // Collection 프로토콜을 준수하기 위한 index(after:) 구현
     public func index(after i: Int) -> Int {
         return entries.index(after: i)
     }
     
-    // 현재 큐의 요소 개수를 반환하는 계산된 속성
     public var count: Int {
         return entries.count
     }
